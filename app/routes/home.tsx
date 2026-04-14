@@ -33,7 +33,7 @@ export default function Index() {
           problems at exactly your level.
         </p>
 
-        <Button size="lg" asChild className="text-lg mb-24">
+        <Button size="lg" asChild className="text-lg mb-24 p-6">
           <Link to="/play">Start playing →</Link>
         </Button>
 
