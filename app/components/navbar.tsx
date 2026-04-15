@@ -1,18 +1,12 @@
-import { NavLink } from "react-router";
-import { Menu } from "lucide-react";
+import { NavLink, useRouteLoaderData } from "react-router";
+import type { loader as rootLoader } from "~/root";
 
+import { Menu } from "lucide-react";
 import { Avatar, AvatarFallback } from "~/components/ui/avatar";
 import { Separator } from "~/components/ui/separator";
 import { Sheet, SheetContent, SheetTrigger } from "~/components/ui/sheet";
 import { Button } from "~/components/ui/button";
-
 import { cn } from "~/lib/utils";
-
-interface NavbarProps {
-  username: string;
-  playerElo?: number;
-  streak?: number;
-}
 
 const TABS = [
   { to: "/play", label: "Play" },
@@ -20,16 +14,16 @@ const TABS = [
   { to: "/stats", label: "My stats" },
 ];
 
-export default function Navbar({
-  username = "marvin",
-  playerElo = 1347,
-  streak = 4,
-}: NavbarProps) {
+export default function Navbar() {
+  const data = useRouteLoaderData<typeof rootLoader>("root");
+
+  const username = data?.username ?? "marvin";
+  const rating = data?.rating ?? 200;
+
   return (
     <nav className="sticky top-0 z-50 flex h-14 items-center justify-between border-b border-border bg-background/95 px-4 md:px-6 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       {/* LEFT */}
       <div className="flex items-center gap-2">
-        {/* Mobile menu */}
         <div className="md:hidden">
           <Sheet>
             <SheetTrigger asChild>
@@ -39,19 +33,13 @@ export default function Navbar({
             </SheetTrigger>
 
             <SheetContent side="left" className="w-72 p-0">
-              {/* Header */}
               <div className="px-5 py-4 border-b border-border flex items-center gap-3">
                 <div className="flex h-9 w-9 items-center justify-center rounded-md border border-border bg-secondary text-sm">
                   ∮
                 </div>
-                <div>
-                  <p className="text-sm font-semibold leading-none">
-                    MathArena
-                  </p>
-                </div>
+                <p className="text-sm font-semibold leading-none">MathArena</p>
               </div>
 
-              {/* Content */}
               <div className="flex flex-col gap-4 px-4 py-5">
                 {TABS.map(({ to, label }) => (
                   <NavLink
@@ -73,25 +61,20 @@ export default function Navbar({
 
                 <Separator />
 
-                {/* Profile */}
                 <div className="flex items-center gap-3 rounded-lg border border-border bg-secondary px-3 py-3">
                   <Avatar className="h-9 w-9">
                     <AvatarFallback>
                       {username.slice(0, 2).toUpperCase()}
                     </AvatarFallback>
                   </Avatar>
-                  <div>
-                    <p className="text-sm font-medium leading-none">
-                      {username}
-                    </p>
-                  </div>
+
+                  <p className="text-sm font-medium leading-none">{username}</p>
                 </div>
               </div>
             </SheetContent>
           </Sheet>
         </div>
 
-        {/* Logo */}
         <NavLink
           to="/"
           className="flex items-center gap-2 hover:opacity-80 transition-opacity"
@@ -103,7 +86,7 @@ export default function Navbar({
         </NavLink>
       </div>
 
-      {/* CENTER (desktop tabs) */}
+      {/* CENTER */}
       <div className="hidden md:flex items-center gap-px rounded-lg border border-border bg-secondary p-1">
         {TABS.map(({ to, label }) => (
           <NavLink
@@ -123,21 +106,20 @@ export default function Navbar({
         ))}
       </div>
 
-      {/* RIGHT (stats + avatar) */}
+      {/* RIGHT */}
       <div className="flex items-center gap-2">
-        {/* Streak */}
+        {/* streak (disabled for now)
         {streak > 1 && (
           <div className="flex items-center gap-1 rounded-md border border-border bg-secondary px-2 py-1 text-xs text-muted-foreground">
             🔥 {streak}
           </div>
         )}
+        */}
 
-        {/* ELO */}
         <div className="flex items-center gap-1 rounded-md border border-border bg-secondary px-2 py-1 font-mono text-xs">
-          <span className="font-medium text-foreground">{playerElo}</span>
+          <span className="font-medium text-foreground">{rating}</span>
         </div>
 
-        {/* Avatar */}
         <Avatar className="h-8 w-8">
           <AvatarFallback className="bg-secondary text-xs font-medium">
             {username.slice(0, 2).toUpperCase()}

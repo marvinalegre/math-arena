@@ -1,6 +1,6 @@
 import { createCookieSessionStorage, type SessionStorage } from "react-router";
 
-type SessionData = { userId: string };
+type SessionData = { sessionId: string };
 type SessionFlashData = { error: string };
 
 let sessionStorage: SessionStorage<SessionData, SessionFlashData>;

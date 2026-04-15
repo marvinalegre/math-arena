@@ -13,6 +13,13 @@
 	"upload_source_maps": true,
 	"compatibility_flags": [
 		"nodejs_compat"
+	],
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "math-arena",
+			"database_id": "fd55c07b-50fd-4940-b005-6046d00a5e62"
+		}
 	]
 	/**
 	 * Smart Placement

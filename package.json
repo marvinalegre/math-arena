@@ -7,6 +7,7 @@
     "cf-typegen": "wrangler types",
     "deploy": "pnpm run build && wrangler deploy",
     "dev": "react-router dev",
+    "migrate": "wrangler d1 migrations apply math-arena",
     "postinstall": "npm run cf-typegen",
     "preview": "pnpm run build && vite preview",
     "typecheck": "npm run cf-typegen && react-router typegen && tsc -b"
@@ -39,4 +40,3 @@
     "wrangler": "^4.81.1"
   }
 }
-
