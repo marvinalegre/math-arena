@@ -25,7 +25,7 @@ export async function loader({ request, context }: Route.LoaderArgs) {
   const cookieHeader = request.headers.get("Cookie");
   const session = await getSession(cookieHeader);
 
-  let sessionId = session.get("sessionId") as string | undefined;
+  let sessionId = session.get("sessionId");
 
   let username: string;
   let rating: number;
@@ -84,14 +84,7 @@ export async function loader({ request, context }: Route.LoaderArgs) {
   username = result.username;
   rating = result.rating;
 
-  return data<LoaderData>(
-    { username, rating },
-    {
-      headers: {
-        "Set-Cookie": await commitSession(session),
-      },
-    },
-  );
+  return data<LoaderData>({ username, rating });
 }
 
 export function Layout({ children }: { children: React.ReactNode }) {
