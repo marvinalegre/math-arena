@@ -17,8 +17,7 @@ const TABS = [
 export default function Navbar() {
   const data = useRouteLoaderData<typeof rootLoader>("root");
 
-  const username = data?.username ?? "marvin";
-  const rating = data?.rating ?? 200;
+  const username = data?.username;
 
   return (
     <nav className="sticky top-0 z-50 flex h-14 items-center justify-between border-b border-border bg-background/95 px-4 md:px-6 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -64,7 +63,7 @@ export default function Navbar() {
                 <div className="flex items-center gap-3 rounded-lg border border-border bg-secondary px-3 py-3">
                   <Avatar className="h-9 w-9">
                     <AvatarFallback>
-                      {username.slice(0, 2).toUpperCase()}
+                      {(username || "??").slice(0, 2).toUpperCase()}
                     </AvatarFallback>
                   </Avatar>
 
@@ -108,21 +107,9 @@ export default function Navbar() {
 
       {/* RIGHT */}
       <div className="flex items-center gap-2">
-        {/* streak (disabled for now)
-        {streak > 1 && (
-          <div className="flex items-center gap-1 rounded-md border border-border bg-secondary px-2 py-1 text-xs text-muted-foreground">
-            🔥 {streak}
-          </div>
-        )}
-        */}
-
-        <div className="flex items-center gap-1 rounded-md border border-border bg-secondary px-2 py-1 font-mono text-xs">
-          <span className="font-medium text-foreground">{rating}</span>
-        </div>
-
         <Avatar className="h-8 w-8">
           <AvatarFallback className="bg-secondary text-xs font-medium">
-            {username.slice(0, 2).toUpperCase()}
+            {(username || "??").slice(0, 2).toUpperCase()}
           </AvatarFallback>
         </Avatar>
 

@@ -15,7 +15,6 @@ import { getSessionStorage } from "./session.server";
 
 type LoaderData = {
   username: string;
-  rating: number;
 };
 
 export async function loader({ request, context }: Route.LoaderArgs) {
@@ -28,7 +27,6 @@ export async function loader({ request, context }: Route.LoaderArgs) {
   let sessionId = session.get("sessionId");
 
   let username: string;
-  let rating: number;
 
   // -----------------------------------
   // 1. No session → create guest user
@@ -40,10 +38,9 @@ export async function loader({ request, context }: Route.LoaderArgs) {
     session.set("sessionId", sessionId);
 
     username = guest.username;
-    rating = guest.rating;
 
     return data<LoaderData>(
-      { username, rating },
+      { username },
       {
         headers: {
           "Set-Cookie": await commitSession(session),
@@ -57,14 +54,14 @@ export async function loader({ request, context }: Route.LoaderArgs) {
   // -----------------------------------
   const result = await DB.prepare(
     `
-    SELECT users.username, users.rating
+    SELECT users.username
     FROM sessions
     JOIN users ON sessions.user_id = users.id
     WHERE sessions.id = ?
     `,
   )
     .bind(sessionId)
-    .first<{ username: string; rating: number }>();
+    .first<{ username: string }>();
 
   // -----------------------------------
   // 3. Invalid session → cleanup + retry
@@ -82,9 +79,8 @@ export async function loader({ request, context }: Route.LoaderArgs) {
   }
 
   username = result.username;
-  rating = result.rating;
 
-  return data<LoaderData>({ username, rating });
+  return data<LoaderData>({ username });
 }
 
 export function Layout({ children }: { children: React.ReactNode }) {
@@ -169,7 +165,6 @@ async function createGuestUser(DB: D1Database) {
   return {
     userId: userResult.meta.last_row_id,
     username,
-    rating,
   };
 }
 
