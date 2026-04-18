@@ -86,17 +86,18 @@ export default function Navbar() {
       </div>
 
       {/* CENTER */}
-      <div className="hidden md:flex items-center gap-px rounded-lg border border-border bg-secondary p-1">
+      <div className="hidden md:flex items-center gap-1 rounded-md p-1">
         {TABS.map(({ to, label }) => (
           <NavLink
             key={to}
             to={to}
             className={({ isActive }) =>
               cn(
-                "rounded-md px-3.5 py-1 text-sm transition-all whitespace-nowrap",
+                "rounded-lg px-3 py-2.5 text-sm transition-all",
+                "hover:bg-secondary",
                 isActive
-                  ? "bg-background font-medium text-foreground shadow-sm border border-border"
-                  : "text-muted-foreground hover:text-foreground",
+                  ? "bg-secondary font-medium text-foreground"
+                  : "text-muted-foreground",
               )
             }
           >
