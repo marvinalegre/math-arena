@@ -10,6 +10,7 @@
     "migrate": "wrangler d1 migrations apply math-arena",
     "postinstall": "npm run cf-typegen",
     "preview": "pnpm run build && vite preview",
+    "schema": "wrangler d1 execute math-arena --command \"SELECT name, sql FROM sqlite_master WHERE type='table' ORDER BY name\"",
     "typecheck": "npm run cf-typegen && react-router typegen && tsc -b"
   },
   "dependencies": {
