@@ -23,7 +23,7 @@ export default function QuestionTypesPanel() {
       },
       stats: {
         attempts: 64,
-        winRate: 0.78,
+        accuracy: 0.78,
       },
     },
 
@@ -50,7 +50,7 @@ export default function QuestionTypesPanel() {
       },
       stats: {
         attempts: 52,
-        winRate: 0.71,
+        accuracy: 0.71,
       },
     },
 
@@ -77,7 +77,7 @@ export default function QuestionTypesPanel() {
       },
       stats: {
         attempts: 47,
-        winRate: 0.63,
+        accuracy: 0.63,
       },
     },
 
@@ -103,7 +103,7 @@ export default function QuestionTypesPanel() {
       },
       stats: {
         attempts: 39,
-        winRate: 0.58,
+        accuracy: 0.58,
       },
     },
 
@@ -129,7 +129,7 @@ export default function QuestionTypesPanel() {
       },
       stats: {
         attempts: 28,
-        winRate: 0.49,
+        accuracy: 0.49,
       },
     },
 
@@ -154,7 +154,7 @@ export default function QuestionTypesPanel() {
       },
       stats: {
         attempts: 70,
-        winRate: 0.82,
+        accuracy: 0.82,
       },
     },
 
@@ -179,7 +179,7 @@ export default function QuestionTypesPanel() {
       },
       stats: {
         attempts: 33,
-        winRate: 0.55,
+        accuracy: 0.55,
       },
     },
 
@@ -205,7 +205,7 @@ export default function QuestionTypesPanel() {
       },
       stats: {
         attempts: 26,
-        winRate: 0.46,
+        accuracy: 0.46,
       },
     },
 
@@ -232,7 +232,7 @@ export default function QuestionTypesPanel() {
       },
       stats: {
         attempts: 19,
-        winRate: 0.41,
+        accuracy: 0.41,
       },
     },
 
@@ -259,7 +259,7 @@ export default function QuestionTypesPanel() {
       },
       stats: {
         attempts: 12,
-        winRate: 0.38,
+        accuracy: 0.38,
       },
     },
   ];
@@ -327,7 +327,7 @@ export default function QuestionTypesPanel() {
               {/* Stats */}
               <div className="mt-3 text-xs text-gray-400 font-mono">
                 {type.stats.attempts} attempts ·{" "}
-                {Math.round(type.stats.winRate * 100)}% win rate
+                {Math.round(type.stats.accuracy * 100)}% accuracy
               </div>
 
               {/* Meta row */}
