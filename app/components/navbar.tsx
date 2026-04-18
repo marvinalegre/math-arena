@@ -11,7 +11,7 @@ import { cn } from "~/lib/utils";
 const TABS = [
   { to: "/play", label: "Play" },
   { to: "/types", label: "Question types" },
-  { to: "/stats", label: "My stats" },
+  { to: "/leaderboard", label: "Leaderboard" },
 ];
 
 export default function Navbar() {
